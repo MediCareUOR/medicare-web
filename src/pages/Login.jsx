@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const commonStyles = {
   input:
-    "w-full pl-4 p-2 border border-border rounded-full focus:outline-none focus:ring focus:ring-ring",
+    "w-full pl-4 p-2 rounded-full focus:outline-none focus:ring focus:ring-ring",
   label: "block text-white text-muted-foreground mb-1",
   button:
     "bg-x3 text-primary-foreground font-bold rounded-full w-28 p-2 text-white rounded hover:bg-opacity-90",
