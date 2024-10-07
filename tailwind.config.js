@@ -8,11 +8,15 @@ export default {
       x2: "#1D566E",
       x3: "#21ABA5",
       x4: "#C7F9E4",
+      x5: "#CDDFF2",
       y1: "52B57E",
       white: "#fff",
     },
     fontFamily: {
       sans: ["DM Sans", "sans-serif"],
+    },
+    backgroundImage: {
+      contact: "url('/images/contactpic.png')",
     },
   },
   plugins: [],
