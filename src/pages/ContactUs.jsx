@@ -1,169 +1,60 @@
-import React, { useState } from "react";
-
-const sharedClasses = {
-  primaryColor: "bg-primary",
-  primaryTextColor: "text-primary-foreground",
-  secondaryColor: "bg-secondary",
-  secondaryTextColor: "text-secondary-foreground",
-  cardBackground: "bg-card",
-  cardShadow: "shadow",
-};
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { MdCall } from "react-icons/md";
+import { RiCustomerService2Fill } from "react-icons/ri";
+import { FaAddressCard } from "react-icons/fa6";
 
 const ContactUs = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
-    <div className="bg-background text-foreground">
-      <header
-        className={`flex justify-between rounded-full mt-4 ml-4 mr-4 mb-2 items-center text-white bg-x1 p-4 ${sharedClasses.primaryColor}`}
-      >
-        <div className="flex items-center">
-          <img src="/images/logo2.png" alt="MediCare Logo" className="h-10" />
-          <nav className="hidden md:flex space-x-6 ml-4">
-            <a
-              href="#"
-              className={`${sharedClasses.primaryTextColor} hover:underline`}
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className={`${sharedClasses.primaryTextColor} hover:underline`}
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className={`${sharedClasses.primaryTextColor} hover:underline`}
-            >
-              Contact Us
-            </a>
-            <a
-              href="#"
-              className={`${sharedClasses.primaryTextColor} hover:underline`}
-            >
-              FAQ
-            </a>
-          </nav>
+    <>
+      <Header />
+      <div className="flex flex-col rounded-3xl mx-4 items-center bg-background text-foreground">
+        <div className="text-center px-8 pt-60 mt-2 h-screen w-full rounded-3xl bg-center bg-cover bg-no-repeat bg-contact">
+          <h1 className="text-5xl text-x1 font-semibold">Contact Us</h1>
+          <br />
+          <p className="mt-4 font-semibold text-2xl flex items-center lg:mx-72 text-center text-x1 text-muted-foreground ">
+            Got questions or need help? Our support team is ready to assist you
+            with any inquiries about our platform or pharmacy locations. We're
+            committed to providing quick and reliable solutions to make your
+            experience with MediCare as smooth as possible.
+          </p>
         </div>
-        <div className="hidden md:block">
-          <a
-            href="#"
-            className={`${sharedClasses.secondaryColor} ${sharedClasses.secondaryTextColor} px-4 py-2 rounded`}
-          >
-            Login
-          </a>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-8  ">
+          <ContactCard
+            Icon={RiCustomerService2Fill}
+            title="Customer Support"
+            email="support@medicare.com"
+            phone="0112-896 963"
+          />
+
+          <ContactCard
+            Icon={MdCall}
+            title="Business Inquiries"
+            email="business@medicare.com"
+            phone="0112-896 964"
+          />
+          <ContactCard
+            Icon={FaAddressCard}
+            title="Mailing Address"
+            address="Medicare Headquarters, 123 Janaraja St., Wellamadama, Matara"
+          />
         </div>
-        <button
-          id="mobile-menu-button"
-          className="md:hidden focus:outline-none"
-          onClick={toggleMobileMenu}
-        >
-          <span className={sharedClasses.primaryTextColor}>☰</span>
-        </button>
-      </header>
-      <div
-        id="mobile-menu"
-        className={
-          isMobileMenuOpen
-            ? `md:hidden ${sharedClasses.primaryColor}`
-            : "hidden md:hidden"
-        }
-      >
-        <nav className="flex flex-col rounded-3xl mr-4 ml-4 text-white bg-x1 p-4">
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            Contact Us
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            FAQ
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.secondaryColor} ${sharedClasses.secondaryTextColor} px-4 py-2 rounded`}
-          >
-            Login
-          </a>
-        </nav>
       </div>
-      <div className="text-center p-8 h-screen w-10/12 bg-center bg-cover bg-no-repeat bg-contact ">
-        <h1 className="text-3xl font-bold">Contact Us</h1>
-        <p className="mt-4 text-muted-foreground">
-          We’re here to help! Whether you have questions, need assistance, or
-          want to provide feedback, our team at MediCare is ready to assist you.
-        </p>
-      </div>
-      <div className="grid border-x1 grid-cols-1 md:grid-cols-3 gap-4 p-8">
-        <ContactCard
-          title="Customer Support"
-          email="support@medicare.com"
-          phone="0112-896 963"
-        />
-        <ContactCard
-          title="Business Inquiries"
-          email="business@medicare.com"
-          phone="0112-896 964"
-        />
-        <ContactCard
-          title="Mailing Address"
-          address="Medicare Headquarters, 123 Janaraja St., Wellamadama, Matara"
-        />
-      </div>
-      <footer
-        className={`flex justify-between items-center p-4 bg-x1 ${sharedClasses.primaryColor}`}
-      >
-        <div className="flex space-x-4">
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            Contact Us
-          </a>
-          <a
-            href="#"
-            className={`${sharedClasses.primaryTextColor} hover:underline`}
-          >
-            FAQ
-          </a>
-        </div>
-        <p className="text-muted-foreground">MediCare © 2024</p>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 };
 
-const ContactCard = ({ title, email, phone, address }) => {
+const ContactCard = ({ Icon, title, email, phone, address }) => {
   return (
     <div
-      className={`${sharedClasses.cardBackground} p-4 rounded-lg ${sharedClasses.cardShadow}`}
+      className="bg-card border-x2 border-2 p-4 rounded-lg shadow max-w-sm m-5 text-center text-x1 
+    h-60 md:min-h-72 md:min-w-52 hover:ring-2 "
     >
+      <div className="flex justify-center mb-8 mt-8">
+        <Icon color="#163A5F" aria-hidden="true" className="w-10 h-10 " />
+      </div>
       <h2 className="font-semibold">{title}</h2>
       {email && (
         <p>
