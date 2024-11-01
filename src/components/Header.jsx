@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCircleUser } from "react-icons/fa6";
+import { RiMenu5Fill } from "react-icons/ri";
+import { IoCloseSharp, IoSearchCircleSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-const LoginComponent = () => {
+const LoginComponent = ({ user }) => {
   return (
     <div className="flex flex-row items-center">
       <FaCircleUser size={20} />
-      <p className="ml-2">Login</p>
+      <p className="ml-2">{user ? "Logout" : "Login"}</p>
+    </div>
+  );
+};
+
+const SearchComponent = () => {
+  return (
+    <div className="flex flex-row items-center">
+      <IoSearchCircleSharp size={28} />
+      <p className="ml-2">Search</p>
     </div>
   );
 };
@@ -15,19 +27,31 @@ const NAV_LINKS = [
   { text: "About", url: "/about" },
   { text: "Contact Us", url: "/contact-us" },
   { text: "FAQ", url: "/faq" },
-  { text: <LoginComponent />, url: "/login" },
 ];
 
 const HEADER_CLASSES =
   "bg-background bg-x1 rounded-full mt-4 ml-4 mr-4 mb-2 text-white p-1 flex items-center justify-between";
 const LINK_CLASSES =
   "bg-x2 text-muted-foreground px-4 py-2 hover:bg-x3 rounded-3xl transition duration-200";
-const MOBILE_MENU_CLASSES = "md:hidden bg-x1 rounded-3xl mr-4 ml-4";
+const MOBILE_MENU_CLASSES = "md:hidden z-10 bg-x1 rounded-3xl mr-4 ml-4";
 const MENU_ITEM_CLASSES =
   "block px-4 py-2 bg-x2 text-white rounded-3xl ml-6 mr-6 mt-3 items-center hover:bg-x3 transition duration-200";
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUser(sessionStorage.getItem("email"));
+  });
+
+  const handleLogOut = () => {
+    if (user != null) {
+      sessionStorage.clear();
+    }
+    navigate("/login");
+  };
 
   return (
     <div className={HEADER_CLASSES}>
@@ -45,27 +69,31 @@ const Header = () => {
             {link.text}
           </a>
         ))}
+        {sessionStorage.getItem("role") === "ROLE_USER" && (
+          <a href="/search" className={LINK_CLASSES}>
+            <SearchComponent />
+          </a>
+        )}
+        {sessionStorage.getItem("role") === "ROLE_ADMIN" && (
+          <a href="/search" className={LINK_CLASSES}>
+            <SearchComponent />
+          </a>
+        )}
+        <a onClick={handleLogOut} className={LINK_CLASSES}>
+          <LoginComponent user={user} />
+        </a>
       </div>
       <div className={`${MOBILE_MENU_CLASSES}`}>
         <div x-data={{ open: false }}>
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-primary focus:outline-none"
+            className="flex items-center text-primary focus:outline-none"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
+            {isMobileMenuOpen ? (
+              <IoCloseSharp size={28} />
+            ) : (
+              <RiMenu5Fill size={28} />
+            )}
           </button>
           {isMobileMenuOpen && (
             <div
@@ -77,6 +105,19 @@ const Header = () => {
                   {link.text}
                 </a>
               ))}
+              {sessionStorage.getItem("role") === "ROLE_USER" && (
+                <a href="/search" className={MENU_ITEM_CLASSES}>
+                  <SearchComponent />
+                </a>
+              )}
+              {sessionStorage.getItem("role") === "ROLE_ADMIN" && (
+                <a href="/search" className={MENU_ITEM_CLASSES}>
+                  <SearchComponent />
+                </a>
+              )}
+              <a onClick={handleLogOut} className={MENU_ITEM_CLASSES}>
+                <LoginComponent user={user} />
+              </a>
             </div>
           )}
         </div>
