@@ -40,7 +40,7 @@ const Otp = () => {
           Your account verification code has been sent to your "
           {email || "Example@mail.com"}"{" "}
         </h4>
-        <password
+        <input
           type="text"
           required
           placeholder="Enter your OTP here"
