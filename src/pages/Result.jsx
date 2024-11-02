@@ -6,9 +6,13 @@ import Footer from "../components/Footer";
 
 const Result = () => {
   // State for drug name, suggestions, district, pharmacies, and filtered pharmacies
-  const [drugName, setDrugName] = useState("");
+  const [drugName, setDrugName] = useState(
+    sessionStorage.getItem("drugName") || ""
+  );
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    sessionStorage.getItem("district") || ""
+  );
   const [data, setData] = useState([]);
 
   const axioshandler = () => {

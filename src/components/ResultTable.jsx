@@ -41,7 +41,10 @@ const ResultTable = ({ pharmacies }) => {
             {/* Render pharmacy data dynamically */}
             {pharmacies.length > 0 ? (
               pharmacies.map((pharmacy, index) => (
-                <tr className="hover:bg-x5 border-b border-slate-200">
+                <tr
+                  key={index}
+                  className="hover:bg-x5 border-b border-slate-200"
+                >
                   <td className="p-4 py-5">
                     <p className="block font-normal text-sm text-slate-800">
                       {pharmacy.drugName}
