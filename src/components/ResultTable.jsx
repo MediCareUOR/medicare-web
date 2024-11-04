@@ -47,7 +47,7 @@ const ResultTable = ({ pharmacies }) => {
                 >
                   <td className="p-4 py-5">
                     <p className="block font-normal text-sm text-slate-800">
-                      {pharmacy.drugName}
+                      {pharmacy.brandName}
                     </p>
                   </td>
                   <td className="p-4 py-5">

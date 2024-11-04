@@ -98,6 +98,7 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
   const [drugName, setDrugName] = useState(drug.drugName);
   const [brandName, setBrandName] = useState(drug.brandName);
   const [unitPrice, setUnitPrice] = useState(drug.unitPrice);
+  const [token, setToken] = useState("");
 
   const handleSave = () => {
     let updatedDrug = {
@@ -112,18 +113,23 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
         updatedDrug,
         {
           headers: {
-            Authorization: sessionStorage.getItem("SavedToken"),
+            Authorization: token,
           },
         }
       )
       .then((res) => {
         console.log(res);
         onSave({ drugName, brandName, unitPrice });
+        location.reload();
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem("SavedToken"));
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-x4 bg-opacity-50 flex justify-center items-center">
@@ -209,21 +215,21 @@ const DrugForm = ({ addDrug, closeForm }) => {
         <input
           type="text"
           placeholder="Drug Name"
-          className="border border-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
+          className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
           value={drugName}
           onChange={(e) => setDrugName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Brand Name"
-          className="border border-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
+          className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
           value={brandName}
           onChange={(e) => setBrandName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Unit Price"
-          className="border border-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
+          className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
           value={unitPrice}
           onChange={(e) => setUnitPrice(e.target.value)}
         />
@@ -324,7 +330,7 @@ const Data = () => {
               <input
                 type="text"
                 placeholder="Search by drug or brand name"
-                className="border focus:border-x2 hover:ring-1 border-x1 rounded-full ml-4 mt-4 p-2 w-64"
+                className="border text-x1 focus:border-x2 hover:ring-1 border-x1 rounded-full ml-4 mt-4 p-2 w-64"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />

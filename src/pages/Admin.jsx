@@ -40,7 +40,7 @@ const Admin = () => {
     <div className="container mx-auto p-4">
       <Header />
       <div className="flex justify-between mt-6 mb-6 text-x1">
-        <div className="bg-muted border border-x1 text-muted-foreground p-2 rounded-full px-4">
+        <div className="bg-muted border mx-4 border-x1 text-muted-foreground p-2 rounded-full px-4">
           <span>Total Pharmacies</span>
           <span className="font-bold ml-5">{count}</span>
         </div>
