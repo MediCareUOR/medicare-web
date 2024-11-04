@@ -64,7 +64,7 @@ const Search = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex items-center flex-col">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row mb-8 items-center">
           <div className=" text-center lg:w-[700px]">
             <h2 className="text-3xl lg:text-4xl text-x1 font-semibold mt-4">
               Find your medicine
