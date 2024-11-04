@@ -64,8 +64,8 @@ const MediCare = () => {
           </h3>
           <p className={textClasses}>
             If you’re a pharmacy owner and would like to be listed on MediCare,
-            please contact us at business@pharmalocate.com for more information
-            on how to join our network.
+            please contact us at medicare.uor@gmail.com for more information on
+            how to join our network.
           </p>
         </div>
       </div>
