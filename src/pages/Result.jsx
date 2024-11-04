@@ -30,6 +30,7 @@ const Result = () => {
           setData([]);
         } else {
           setData(res.data.data.dataList);
+          console.log(res.data.data.dataList);
         }
       })
       .catch((e) => {

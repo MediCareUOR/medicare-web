@@ -1,6 +1,8 @@
 import React from "react";
 
 const ResultTable = ({ pharmacies }) => {
+  console.log(pharmacies);
+
   return (
     <div className=" mx-auto">
       <div
@@ -33,6 +35,11 @@ const ResultTable = ({ pharmacies }) => {
               <th className="p-4 border-b border-slate-200 bg-slate-50">
                 <p className="text-sm font-semibold leading-none text-slate-500">
                   Unit Price
+                </p>
+              </th>
+              <th className="p-4 border-b border-slate-200 bg-slate-50">
+                <p className="text-sm font-semibold leading-none text-slate-500">
+                  Stock Quantity
                 </p>
               </th>
             </tr>
@@ -69,9 +76,11 @@ const ResultTable = ({ pharmacies }) => {
                     <p className="text-sm text-slate-500">
                       Rs.{pharmacy.unitPrice}
                     </p>
-                    {/* <p className="text-xs text-slate-500">
-                      updated: {pharmacy.updatedAt}
-                    </p> */}
+                  </td>
+                  <td>
+                    <p className="text-xs text-slate-500">
+                      {pharmacy.stockQty}
+                    </p>
                   </td>
                 </tr>
               ))

@@ -45,6 +45,7 @@ const DrugTable = ({ drugs, onDelete, onEdit }) => {
               <th className="h-10 font-semibold text-sm">Drug Name</th>
               <th className="h-10 font-semibold text-sm">Brand Name</th>
               <th className="h-10 font-semibold text-sm">Unit Price</th>
+              <th className="h-10 font-semibold text-sm">Stock Quantity</th>
               <th className="h-10 font-semibold text-sm">Action</th>
             </tr>
           </thead>
@@ -54,6 +55,7 @@ const DrugTable = ({ drugs, onDelete, onEdit }) => {
                 <td className={borderClass}>{drug.drugName}</td>
                 <td className={borderClass}>{drug.brandName}</td>
                 <td className={borderClass}>Rs.{drug.unitPrice}</td>
+                <td className={borderClass}>{drug.stockQty}</td>
                 <td className={borderClass}>
                   <button
                     onClick={() => onEdit(index)}
@@ -98,6 +100,7 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
   const [drugName, setDrugName] = useState(drug.drugName);
   const [brandName, setBrandName] = useState(drug.brandName);
   const [unitPrice, setUnitPrice] = useState(drug.unitPrice);
+  const [stockQty, setStockQty] = useState(drug.stockQty);
   const [token, setToken] = useState("");
 
   const handleSave = () => {
@@ -105,7 +108,7 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
       drugName: drugName,
       brandName: brandName,
       unitPrice: unitPrice,
-      stockQty: "20000",
+      stockQty: stockQty,
     };
     axios
       .put(
@@ -119,7 +122,7 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
       )
       .then((res) => {
         console.log(res);
-        onSave({ drugName, brandName, unitPrice });
+        onSave({ drugName, brandName, unitPrice, stockQty });
         location.reload();
       })
       .catch((e) => {
@@ -141,22 +144,29 @@ const EditDrugForm = ({ drug, onSave, onCancel }) => {
           type="text"
           placeholder="Drug Name"
           className="border border-x1 text-x1 rounded-full p-2 mb-2 w-full"
-          value={drugName}
+          value={drugName ?? ""}
           onChange={(e) => setDrugName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Brand Name"
           className="border border-x1 text-x1 rounded-full p-2 mb-2 w-full"
-          value={brandName}
+          value={brandName ?? ""}
           onChange={(e) => setBrandName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Unit Price"
           className="border border-x1 text-x1 rounded-full p-2 mb-2 w-full"
-          value={unitPrice}
+          value={unitPrice ?? ""}
           onChange={(e) => setUnitPrice(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Stock Quantity"
+          className="border border-x1 text-x1 rounded-full p-2 mb-2 w-full"
+          value={stockQty ?? ""}
+          onChange={(e) => setStockQty(e.target.value)}
         />
         <button onClick={handleSave} className={`mr-2 ${primaryButtonClass}`}>
           Save
@@ -173,6 +183,7 @@ const DrugForm = ({ addDrug, closeForm }) => {
   const [drugName, setDrugName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
+  const [stockQty, setStockQty] = useState("");
 
   const handleAddDrug = () => {
     axios
@@ -183,7 +194,7 @@ const DrugForm = ({ addDrug, closeForm }) => {
           drugDescription: "default",
           brandName: brandName,
           unitPrice: unitPrice,
-          stockQty: 1000,
+          stockQty: stockQty,
         },
         {
           headers: {
@@ -199,10 +210,11 @@ const DrugForm = ({ addDrug, closeForm }) => {
       });
 
     if (drugName && brandName && unitPrice) {
-      addDrug({ drugName, brandName, unitPrice });
+      addDrug({ drugName, brandName, unitPrice, stockQty });
       setDrugName("");
       setBrandName("");
       setUnitPrice("");
+      setStockQty("");
     }
   };
 
@@ -216,22 +228,29 @@ const DrugForm = ({ addDrug, closeForm }) => {
           type="text"
           placeholder="Drug Name"
           className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
-          value={drugName}
+          value={drugName ?? ""}
           onChange={(e) => setDrugName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Brand Name"
           className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
-          value={brandName}
+          value={brandName ?? ""}
           onChange={(e) => setBrandName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Unit Price"
           className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
-          value={unitPrice}
+          value={unitPrice ?? ""}
           onChange={(e) => setUnitPrice(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Stock Quantity"
+          className="border border-x1 text-x1 hover:ring-1 rounded-full p-2 mb-2 w-full"
+          value={stockQty ?? ""}
+          onChange={(e) => setStockQty(e.target.value)}
         />
         <button
           onClick={handleAddDrug}
@@ -250,10 +269,30 @@ const DrugForm = ({ addDrug, closeForm }) => {
 const Data = () => {
   const [showForm, setShowForm] = useState(false);
   const [drugs, setDrugs] = useState([
-    { drugName: "Paracetamol", brandName: "Panadol", unitPrice: "5.00" },
-    { drugName: "Paracetamol", brandName: "Crocin", unitPrice: "6.00" },
-    { drugName: "Ibuprofen", brandName: "Brufen", unitPrice: "10.00" },
-    { drugName: "Ibuprofen", brandName: "Advil", unitPrice: "15.00" },
+    {
+      drugName: "Paracetamol",
+      brandName: "Panadol",
+      unitPrice: "5.00",
+      stockQty: "1000",
+    },
+    {
+      drugName: "Paracetamol",
+      brandName: "Crocin",
+      unitPrice: "6.00",
+      stockQty: "2000",
+    },
+    {
+      drugName: "Ibuprofen",
+      brandName: "Brufen",
+      unitPrice: "10.00",
+      stockQty: "3000",
+    },
+    {
+      drugName: "Ibuprofen",
+      brandName: "Advil",
+      unitPrice: "15.00",
+      stockQty: "4000",
+    },
   ]);
   const [search, setSearch] = useState("");
   const [editingDrug, setEditingDrug] = useState(null);
