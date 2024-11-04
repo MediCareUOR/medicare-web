@@ -42,6 +42,11 @@ const ResultTable = ({ pharmacies }) => {
                   Stock Quantity
                 </p>
               </th>
+              <th className="p-4 border-b border-slate-200 bg-slate-50">
+                <p className="text-sm font-semibold leading-none text-slate-500">
+                  Location
+                </p>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -68,9 +73,13 @@ const ResultTable = ({ pharmacies }) => {
                     </p>
                   </td>
                   <td className="p-4 py-5">
-                    <p className="text-sm text-slate-500">
+                    <a
+                      href={"tel:" + pharmacy.userPharmacyDto.contactNumber}
+                      className="text-sm text-slate-500"
+                      target="_blank"
+                    >
                       {pharmacy.userPharmacyDto.contactNumber}
-                    </p>
+                    </a>
                   </td>
                   <td className="p-4 py-5">
                     <p className="text-sm text-slate-500">
@@ -78,9 +87,23 @@ const ResultTable = ({ pharmacies }) => {
                     </p>
                   </td>
                   <td>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs ml-10 text-slate-500">
                       {pharmacy.stockQty}
                     </p>
+                  </td>
+                  <td>
+                    <a
+                      href={
+                        "https://www.google.com/maps/place/" +
+                        pharmacy.userPharmacyDto.latitude +
+                        "," +
+                        pharmacy.userPharmacyDto.longitude
+                      }
+                      target="_blank"
+                      className="text-xs text-slate-500"
+                    >
+                      Open in Google Maps
+                    </a>
                   </td>
                 </tr>
               ))
