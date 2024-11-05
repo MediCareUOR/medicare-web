@@ -26,6 +26,7 @@ const Otp = () => {
         navigate("/login");
       })
       .catch((e) => {
+        window.alert("Invalid OTP");
         console.log(e);
       });
   };

@@ -186,28 +186,39 @@ const DrugForm = ({ addDrug, closeForm }) => {
   const [stockQty, setStockQty] = useState("");
 
   const handleAddDrug = () => {
-    axios
-      .post(
-        "http://localhost:8081/api/v1/drugs/save-drug",
-        {
-          drugName: drugName,
-          drugDescription: "default",
-          brandName: brandName,
-          unitPrice: unitPrice,
-          stockQty: stockQty,
-        },
-        {
-          headers: {
-            Authorization: sessionStorage.getItem("SavedToken"),
+    if (
+      drugName === "" ||
+      brandName === "" ||
+      unitPrice === "" ||
+      stockQty === ""
+    ) {
+      window.alert("Please fill all the fields");
+      return;
+    } else {
+      axios
+        .post(
+          "http://localhost:8081/api/v1/drugs/save-drug",
+          {
+            drugName: drugName,
+            drugDescription: "default",
+            brandName: brandName,
+            unitPrice: unitPrice,
+            stockQty: stockQty,
           },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+          {
+            headers: {
+              Authorization: sessionStorage.getItem("SavedToken"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          location.reload();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
 
     if (drugName && brandName && unitPrice) {
       addDrug({ drugName, brandName, unitPrice, stockQty });
@@ -335,6 +346,7 @@ const Data = () => {
       .then((res) => {
         console.log(res);
         setDrugs(drugs.filter((_, i) => i !== index));
+        location.reload();
       })
       .catch((e) => {
         console.log(e);
